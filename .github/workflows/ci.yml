@@ -14,5 +14,5 @@ jobs:
       run: |
         java -version
         javac -version
-        apt-get update
+        sudo apt-get update
 
