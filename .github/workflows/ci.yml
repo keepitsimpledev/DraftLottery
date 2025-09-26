@@ -1,3 +1,4 @@
+# https://docs.github.com/en/actions/tutorials/build-and-test-code/java-with-gradle
 name: ci.yml
 
 on: [push, workflow_dispatch]
@@ -8,13 +9,14 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '18'
+          distribution: 'temurin'
 
-    - name: ci
-      run: |
-        java -version
-        javac -version
-        sudo apt-get update
-        sudo apt install openjdk-18-jdk-headless -y
-        java -version
-        javac -version
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
+
+      - name: Build with Gradle
+        run: ./gradlew build
