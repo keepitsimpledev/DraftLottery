@@ -15,6 +15,6 @@ jobs:
         java -version
         javac -version
         sudo apt-get update
-        sudo apt-get install openjdk-18-jdk-headless
+        sudo apt install openjdk-18-jdk-headless -y
         java -version
         javac -version
