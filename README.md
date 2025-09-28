@@ -1,8 +1,8 @@
 # DraftLottery
 
 ## set-up
-- project foundation created by [Oracle Java VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Oracle.oracle-java)
-- downgraded gradle with `./gradlew wrapper --gradle-version 8.14.3` because deprecation of `org.gradle.util.VersionNumber` caused IDE errors like "cannot find symbol" or "package not found"
+- project foundation created by [Java Platform Extension](https://marketplace.visualstudio.com/items?itemName=Oracle.oracle-java)
+- downgraded gradle with `./gradlew wrapper --gradle-version 8.14.3` followed by [Java Platform Extension](https://marketplace.visualstudio.com/items?itemName=Oracle.oracle-java)'s "Clean the Java language server", because deprecation of `org.gradle.util.VersionNumber` caused IDE errors like "cannot find symbol" or "package not found"
   - https://gradle.org/releases/
   - https://github.com/gradle/gradle/issues/34546
 
