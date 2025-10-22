@@ -3,12 +3,26 @@
  */
 package org.keepitsimple.draftlottery;
 
+import static org.keepitsimple.draftlottery.TieredPowerball.determineDraftOrder;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        String[] draftOrder;
+        if (args.length == 0) {
+            String[] defaultOrderedPlaces = {"1st", "2nd", "3rd", "4th", "8th", "7th",
+                    "6th", "5th", "14th", "13th", "12th", "11th", "10th", "9th"};
+            draftOrder = determineDraftOrder(defaultOrderedPlaces);
+        } else {
+            String[] orderedPlaces = args;
+            draftOrder = determineDraftOrder(orderedPlaces);
+        }
+
+        System.out.println("draft order:");
+        for (int i = 1; i <= draftOrder.length; i++) {
+            System.out.println(i + ": " + draftOrder[i - 1]);
+        }
     }
 }

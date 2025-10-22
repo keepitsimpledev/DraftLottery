@@ -41,7 +41,7 @@ public class TieredPowerball {
         return draftOrder;
     }
 
-    public static List<TeamChances> calculateTeamChances(String[] teamsRankedFromLowestChance) {
+    protected static List<TeamChances> calculateTeamChances(String[] teamsRankedFromLowestChance) {
         List<TeamChances> teamsChances = new LinkedList<>();
         for (int i = 0; i < teamsRankedFromLowestChance.length; i++) {
             // `1 << i` is cleaner than `(int)Math.round(pow(2d, Double.valueOf(i)))`
