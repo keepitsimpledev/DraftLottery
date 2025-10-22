@@ -1,6 +1,5 @@
 package org.keepitsimple.draftlottery;
 
-import static java.lang.Math.pow;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,8 +43,8 @@ public class TieredPowerball {
     public static List<TeamChances> calculateTeamChances(String[] teamsRankedFromLowestChance) {
         List<TeamChances> teamsChances = new LinkedList<>();
         for (int i = 0; i < teamsRankedFromLowestChance.length; i++) {
-            // TODO: make this math less ugly
-            teamsChances.add(new TeamChances(teamsRankedFromLowestChance[i], (int)Math.round(pow(2d, Double.valueOf(i)))));
+            // `1 << i` is cleaner than `(int)Math.round(pow(2d, Double.valueOf(i)))`
+            teamsChances.add(new TeamChances(teamsRankedFromLowestChance[i], 1 << i));
         }
         return teamsChances;
     }
