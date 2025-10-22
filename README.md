@@ -11,4 +11,6 @@
 - [Ubuntu 22.04](https://www.releases.ubuntu.com/22.04/)
 
 ## usage
+- `./gradlew run --args="<LIST OF CANDIDATES, FROM LEAST TO MOST CHANCES>"`
+  - ex `./gradlew run --args="Wizards Bucks Thunder Bulls Raptors Hornets"`
 - reminder: `./gradlew tasks` to see available tasks
