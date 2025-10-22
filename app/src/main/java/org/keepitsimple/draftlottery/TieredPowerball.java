@@ -26,6 +26,7 @@ public class TieredPowerball {
 
                 if (result <= current) {
                     draftOrder[draftPosition] = teamsChances.get(i).getTeam();
+                    total -= teamsChances.get(i).getChancesCount();
                     teamsChances.remove(i);
                     picked = true;
                     break;
@@ -33,7 +34,7 @@ public class TieredPowerball {
             }
             if (!picked) {
                 // improve handling here - maybe make new exception
-                throw new RuntimeException("not picked");
+                throw new RuntimeException("failed to determine draft placement");
             }
         }
 
