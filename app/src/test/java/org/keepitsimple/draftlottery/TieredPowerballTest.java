@@ -12,36 +12,57 @@ public class TieredPowerballTest {
     // TODO: consider parameterizing these three tests
     @Test
     public void determineDraftOrderOneTeamTest() {
+        // arrange
         String[] teams = {"1st"};
-        String[] result = TieredPowerball.determineDraftOrder(teams);
 
+        // act
+        TeamChances[] result = TieredPowerball.determineDraftOrder(teams);
+
+        // assert
         assertThat(result.length, is(teams.length));
-        assertThat(result[0], is("1st"));
+        TeamChances expected = new TeamChances("1st", 1);
+        expected.setPercent(100);
+        assertThat(result[0], is(expected));
     }
 
     @Test
     public void determineDraftOrderTwoTeamsTest() {
+        // arrange
         String[] teams = {"1st", "2nd"};
-        String[] result = TieredPowerball.determineDraftOrder(teams);
 
+        // act
+        TeamChances[] result = TieredPowerball.determineDraftOrder(teams);
+
+        // assert
         assertThat(result.length, is(teams.length));
-        assertThat(List.of(result), containsInAnyOrder(teams));
+        TeamChances[] expected = {new TeamChances("1st", 1), new TeamChances("2nd", 2)};
+        expected[0].setPercent(1f / 3f * 100);
+        expected[1].setPercent(2f / 3f * 100);
+        assertThat(List.of(result), containsInAnyOrder(expected[0], expected[1]));
     }
 
     @Test
     public void determineDraftOrderThreeTeamsTest() {
+        // arrance
         String[] teams = {"1st", "2nd", "3rd"};
-        String[] result = TieredPowerball.determineDraftOrder(teams);
 
+        // act
+        TeamChances[] result = TieredPowerball.determineDraftOrder(teams);
+
+        // assert
         assertThat(result.length, is(teams.length));
-        assertThat(List.of(result), containsInAnyOrder(teams));
+        TeamChances[] expected = {new TeamChances("1st", 1), new TeamChances("2nd", 2), new TeamChances("3rd", 4)};
+        expected[0].setPercent(1f / 7f * 100);
+        expected[1].setPercent(2f / 7f * 100);
+        expected[2].setPercent(4f / 7f * 100);
+        assertThat(List.of(result), containsInAnyOrder(expected[0], expected[1], expected[2]));
     }
 
     @Test
     public void calculateTeamChancesTest() {
         String[] teamsRankedFromLowestChance = {"1st", "2nd", "4th", "3rd", "8th", "7th", "6th", "5th"};
 
-        List<TeamChances> teamsChances = TieredPowerball.calculateTeamChances(teamsRankedFromLowestChance);
+        List<TeamChances> teamsChances = TieredPowerball.setTeamChances(teamsRankedFromLowestChance);
 
         assertThat(teamsChances.get(0).getTeam(), is("1st"));
         assertThat(teamsChances.get(0).getChancesCount(), is(1));
