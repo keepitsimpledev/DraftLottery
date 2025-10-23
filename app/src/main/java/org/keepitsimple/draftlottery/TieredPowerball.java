@@ -3,6 +3,7 @@ package org.keepitsimple.draftlottery;
 import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TieredPowerball {
 
@@ -56,6 +57,29 @@ public class TieredPowerball {
     }
 
     public static void simulateLottery(PrintStream printStream, String[] teamsRankedFromLowestChance) {
+        TeamChances[] teamsInOrder = determineDraftOrder(teamsRankedFromLowestChance);
+        try {
+            for (int i = 1; i <= teamsInOrder.length; i++) {
+                printStream.println("Pick " + i + " goes to...");
+                drumroll(printStream);
+                TeamChances picked = teamsInOrder[i - 1];
+                printStream.println(picked.getTeam() + "! (" + picked.getPercent() + "%)\n");
+                pause();
+            }
+        } catch (InterruptedException e) {
+            printStream.println("Terminal lottery simulation failure.");
+        }
 
+    }
+
+    private static void drumroll(PrintStream printStream) throws InterruptedException {
+        printStream.println("...🥁......");
+        pause();
+        printStream.println("......🥁...");
+        pause();
+    }
+
+    private static void pause() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
     }
 }
