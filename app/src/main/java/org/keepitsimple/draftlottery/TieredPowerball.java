@@ -59,6 +59,9 @@ public class TieredPowerball {
     public static void simulateLottery(PrintStream printStream, String[] teamsRankedFromLowestChance) {
         TeamChances[] teamsInOrder = determineDraftOrder(teamsRankedFromLowestChance);
         try {
+            pause();
+            printStream.println("Welcome to the lottery!👏👏👏👏\n");
+            pause();
             for (int i = 1; i <= teamsInOrder.length; i++) {
                 printStream.println("Pick " + i + " goes to...");
                 drumroll(printStream);
@@ -80,6 +83,6 @@ public class TieredPowerball {
     }
 
     private static void pause() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(2);
     }
 }

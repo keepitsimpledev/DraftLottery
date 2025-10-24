@@ -4,8 +4,11 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class TieredPowerballTest {
 
@@ -43,7 +46,7 @@ public class TieredPowerballTest {
 
     @Test
     public void determineDraftOrderThreeTeamsTest() {
-        // arrance
+        // arrange
         String[] teams = {"1st", "2nd", "3rd"};
 
         // act
@@ -58,12 +61,33 @@ public class TieredPowerballTest {
         assertThat(List.of(result), containsInAnyOrder(expected[0], expected[1], expected[2]));
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+    public void testPercent(int candidateCount) {
+        String[] teams = new String[10];
+
+        for (int i = 0 ; i < candidateCount; i++) {
+            teams[i] = "" + i;
+        }
+
+        TeamChances[] teamsChances = TieredPowerball.determineDraftOrder(teams);
+
+        float sum = 0;
+        for (TeamChances teamChances : teamsChances) {
+            sum += teamChances.getPercent();
+        }
+        assertThat(100d, closeTo(sum, .00001d));
+    }
+
     @Test
     public void calculateTeamChancesTest() {
+        // arrange
         String[] teamsRankedFromLowestChance = {"1st", "2nd", "4th", "3rd", "8th", "7th", "6th", "5th"};
 
+        // act
         List<TeamChances> teamsChances = TieredPowerball.setTeamChances(teamsRankedFromLowestChance);
 
+        // assert
         assertThat(teamsChances.get(0).getTeam(), is("1st"));
         assertThat(teamsChances.get(0).getChancesCount(), is(1));
 
