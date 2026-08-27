@@ -77,7 +77,7 @@ public class TieredPowerball {
             for (int i = orderedByOdds.length - 1; i >= 0; i--) {
                 out.printf("%s: %.2f%%\n", orderedByOdds[i].getTeam(), orderedByOdds[i].getPercent());
             }
-            pause();
+            pause(4);
 
             for (int i = teamsInOrder.length; i > 0; i--) {
                 out.printf("\nPick %d goes to...\n", i);
@@ -101,5 +101,9 @@ public class TieredPowerball {
 
     private static void pause() throws InterruptedException {
         TimeUnit.MILLISECONDS.sleep(1250);
+    }
+
+    private static void pause(int p) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(p * 1250);
     }
 }
