@@ -79,7 +79,7 @@ public class TieredPowerball {
             }
             pause();
 
-            for (int i = 1; i <= teamsInOrder.length; i++) {
+            for (int i = teamsInOrder.length; i > 0; i--) {
                 out.printf("\nPick %d goes to...\n", i);
                 drumroll(out);
                 TeamChances picked = teamsInOrder[i - 1];
