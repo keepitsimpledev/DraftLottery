@@ -75,7 +75,7 @@ public class TieredPowerball {
             Collections.sort(Arrays.asList(orderedByOdds), new TeamChancesComparator());
 
             for (int i = orderedByOdds.length - 1; i >= 0; i--) {
-                out.printf("%s: %f%%\n", orderedByOdds[i].getTeam(), orderedByOdds[i].getPercent());
+                out.printf("%s: %.2f%%\n", orderedByOdds[i].getTeam(), orderedByOdds[i].getPercent());
             }
             pause();
 
